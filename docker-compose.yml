@@ -71,28 +71,28 @@ services:
       SERVICE_PRECONDITION: "spark-master:7077"
     env_file: ./hadoop.env
 
-  hbase:
-    image: bde2020/hbase-standalone:2.3.0
-    container_name: hbase
-    volumes:
-      - hbase_data:/hbase-data
-      - hbase_zookeeper_data:/zookeeper-data
-    ports:
-      - 16000:16000
-      - 16010:16010
-      - 16020:16020
-      - 16030:16030
-      - 2888:2888
-      - 3888:3888
-      - 2181:2181
-    environment:
-      SERVICE_PRECONDITION: "namenode:9870 datanode:9864"
-    env_file:
-      - ./hbase-standalone.env
+    #hbase:
+    #image: bde2020/hbase-standalone:2.3.0
+    #container_name: hbase
+    #volumes:
+    # - hbase_data:/hbase-data
+    # - hbase_zookeeper_data:/zookeeper-data
+    #ports:
+    # - 16000:16000
+    # - 16010:16010
+    # - 16020:16020
+    # - 16030:16030
+    # - 2888:2888
+    # - 3888:3888
+    # - 2181:2181
+    #environment:
+    # SERVICE_PRECONDITION: "namenode:9870 datanode:9864"
+    #env_file:
+    # - ./hbase-standalone.env
 
 volumes:
   hadoop_namenode:
   hadoop_datanode:
   hadoop_historyserver:
-  hbase_data:
-  hbase_zookeeper_data:
+    #hbase_data:
+    #hbase_zookeeper_data:

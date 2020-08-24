@@ -7,18 +7,18 @@ task=$1
 shift  
 
 build () {
- 	 #docker build -t bde2020/hadoop-base:$(current_branch) ./base \
-	 # && docker build -t bde2020/hadoop-namenode:$(current_branch) ./namenode \
-	 # && docker build -t bde2020/hadoop-datanode:$(current_branch) ./datanode \
-	 # && docker build -t bde2020/hadoop-resourcemanager:$(current_branch) ./resourcemanager \
-	 # && docker build -t bde2020/hadoop-nodemanager:$(current_branch) ./nodemanager \
-	 # && docker build -t bde2020/hadoop-historyserver:$(current_branch) ./historyserver \
-	 # && docker build -t bde2020/hadoop-submit:$(current_branch) ./submit  \     
-	 # && docker build -t bde2020/spark-base:2.4.6 ./spark-base \
-	 # && docker build -t bde2020/spark-master:2.4.6 ./spark-master \
-	 # && docker build -t bde2020/spark-worker:2.4.6 ./spark-worker
-	   docker build -t bde2020/hbase-base:2.3.0 ./hbase-base \
-	&& docker build -t bde2020/hbase-standalone:2.3.0 ./hbase-standalone
+ 	  docker build -t bde2020/hadoop-base:$(current_branch) ./base \
+	   && docker build -t bde2020/hadoop-namenode:$(current_branch) ./namenode \
+	   && docker build -t bde2020/hadoop-datanode:$(current_branch) ./datanode \
+	   && docker build -t bde2020/hadoop-resourcemanager:$(current_branch) ./resourcemanager \
+	   && docker build -t bde2020/hadoop-nodemanager:$(current_branch) ./nodemanager \
+	   && docker build -t bde2020/hadoop-historyserver:$(current_branch) ./historyserver \
+	   && docker build -t bde2020/hadoop-submit:$(current_branch) ./submit  \
+	   && docker build -t bde2020/spark-base:2.4.6 ./spark-base \
+	   && docker build -t bde2020/spark-master:2.4.6 ./spark-master \
+	   && docker build -t bde2020/spark-worker:2.4.6 ./spark-worker
+	   #&& docker build -t bde2020/hbase-base:2.3.0 ./hbase-base \
+	   #&& docker build -t bde2020/hbase-standalone:2.3.0 ./hbase-standalone
 }
 
 wordcount () {
