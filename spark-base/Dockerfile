@@ -1,6 +1,6 @@
 FROM bde2020/hadoop-base:3.1.3
 
-ENV SPARK_URL https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.4.6/spark-2.4.6-bin-without-hadoop-scala-2.12.tgz 
+ENV SPARK_URL https://mirror.bit.edu.cn/apache/spark/spark-2.4.6/spark-2.4.6-bin-without-hadoop-scala-2.12.tgz
 
 RUN set -x \
     && curl -fsL "$SPARK_URL" -o /tmp/spark-2.4.6.tgz \
