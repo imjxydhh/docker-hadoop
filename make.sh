@@ -2,39 +2,36 @@
 
 DOCKER_NETWORK=dockerhadoop_default
 ENV_FILE=hadoop.env
-hadoop_version="3.1.3"
-spark_version="2.4.6"
-hbase_version="2.3.0"
+build_prefix=z907738103/bigdata
 task=$1
 shift  
 
 build () {
- 	  docker build -t bde2020/hadoop-base:$hadoop_version  ./base \
-	   && docker build -t bde2020/hadoop-namenode:$hadoop_version  ./namenode \
-	   && docker build -t bde2020/hadoop-datanode:$hadoop_version  ./datanode \
-	   && docker build -t bde2020/hadoop-resourcemanager:$hadoop_version  ./resourcemanager \
-	   && docker build -t bde2020/hadoop-nodemanager:$hadoop_version  ./nodemanager \
-	   && docker build -t bde2020/hadoop-historyserver:$hadoop_version  ./historyserver \
-	   && docker build -t bde2020/hadoop-submit:$hadoop_version  ./submit  \
-	   && docker build -t bde2020/spark-base:$spark_version ./spark-base \
-	   && docker build -t bde2020/spark-master:$spark_version ./spark-master \
-	   && docker build -t bde2020/spark-worker:$spark_version ./spark-worker \
-	   && docker build -t bde2020/hbase-base:$hbase_version ./hbase-base \
-	   && docker build -t bde2020/hbase-standalone:$hbase_version ./hbase-standalone
+ 	 # docker build -t $build_prefix:base  ./base \
+	 #   docker build -t $build_prefix:namenode  ./namenode \
+	 #  && docker build -t $build_prefix:datanode  ./datanode \
+	 #  && docker build -t $build_prefix:resourcemanager  ./resourcemanager \
+	 #  && docker build -t $build_prefix:nodemanager  ./nodemanager \
+	 #  && docker build -t $build_prefix:historyserver  ./historyserver \
+	 #  && docker build -t $build_prefix:sparkbase ./spark-base \
+	 #  && docker build -t $build_prefix:sparkmaster ./spark-master \
+	 #  && docker build -t $build_prefix:sparkworker ./spark-worker \
+	 #   && docker build -t $build_prefix:hbasebase ./hbase-base \
+	    docker build -t $build_prefix:hbasestandalone ./hbase-standalone
 }
 
 wordcount () {
 	docker build -t hadoop-wordcount ./submit \
-	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version  hdfs dfs -mkdir -p /input/ \
-	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version  hdfs dfs -copyFromLocal /opt/hadoop-3.1.3/README.txt /input/ \
+	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base  hdfs dfs -mkdir -p /input/ \
+	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base  hdfs dfs -copyFromLocal /opt/hadoop-3.1.3/README.txt /input/ \
 	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  hadoop-wordcount \
-	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version  hdfs dfs -cat /output/* \
-	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version  hdfs dfs -rm -r /output \
-	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version  hdfs dfs -rm -r /input   
+	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base  hdfs dfs -cat /output/* \
+	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base  hdfs dfs -rm -r /output \
+	 && docker run --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base  hdfs dfs -rm -r /input   
 }
 
 bash () {
-	docker run -it --network $DOCKER_NETWORK  --env-file $ENV_FILE  bde2020/hadoop-base:$hadoop_version /bin/bash
+	docker run -it --network $DOCKER_NETWORK  --env-file $ENV_FILE  $build_prefix:base /bin/bash
 }
 
 spark_quick_submit() {

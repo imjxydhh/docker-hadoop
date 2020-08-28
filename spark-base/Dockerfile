@@ -1,4 +1,4 @@
-FROM bde2020/hadoop-base:3.1.3
+FROM z907738103/bigdata:base
 
 ENV SPARK_URL https://mirror.bit.edu.cn/apache/spark/spark-2.4.6/spark-2.4.6-bin-without-hadoop-scala-2.12.tgz
 

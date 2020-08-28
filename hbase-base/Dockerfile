@@ -1,20 +1,18 @@
-FROM openjdk:8
+FROM z907738103/bigdata:base
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl netcat
+ENV HBASE_VERSION 2.3.1
+ENV HBASE_URL https://mirrors.bfsu.edu.cn/apache/hbase/2.3.1/hbase-2.3.1-bin.tar.gz
 
-ENV HBASE_VERSION 2.3.0
-ENV HBASE_URL http://www.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
 RUN set -x \
     && curl -fSL "$HBASE_URL" -o /tmp/hbase.tar.gz \
-    && curl -fSL "$HBASE_URL.asc" -o /tmp/hbase.tar.gz.asc \
     && tar -xvf /tmp/hbase.tar.gz -C /opt/ \
     && rm /tmp/hbase.tar.gz*
 
 RUN ln -s /opt/hbase-$HBASE_VERSION/conf /etc/hbase
 RUN mkdir /opt/hbase-$HBASE_VERSION/logs
 
-RUN mkdir /hadoop-data
+RUN mkdir -p /hadoop-data
 
 ENV HBASE_PREFIX=/opt/hbase-$HBASE_VERSION
 ENV HBASE_HOME="$HBASE_PREFIX"

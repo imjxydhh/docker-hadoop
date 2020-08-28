@@ -3,7 +3,11 @@ FROM debian:9
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 MAINTAINER Giannis Mouchakis <gmouchakis@iit.demokritos.gr>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+RUN rm /etc/apt/sources.list
+
+ADD sources.list /etc/apt/
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated --no-install-recommends \
       openjdk-8-jdk \
       net-tools \
       curl \

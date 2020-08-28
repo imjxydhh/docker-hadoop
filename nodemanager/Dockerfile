@@ -1,4 +1,4 @@
-FROM bde2020/hadoop-base:3.1.3
+FROM z907738103/bigdata:base
 
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 

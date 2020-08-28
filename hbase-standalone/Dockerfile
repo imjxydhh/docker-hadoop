@@ -1,4 +1,4 @@
-FROM bde2020/hbase-base:2.3.0
+FROM z907738103/bigdata:hbasebase
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh

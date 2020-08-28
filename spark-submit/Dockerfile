@@ -1,4 +1,4 @@
-FROM bde2020/spark-base:2.4.6
+FROM z907738103/bigdata:sparkbase
 
 RUN mkdir /opt/spark-2.4.6-bin-without-hadoop-scala-2.12/appjars
 
